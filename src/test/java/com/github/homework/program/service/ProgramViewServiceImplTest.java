@@ -52,6 +52,7 @@ class ProgramViewServiceImplTest {
                     then(programViewDto.getIntroduction()).isEqualTo("introduction");
                     then(programViewDto.getIntroductionDetail()).isEqualTo("introductionDetail");
                     then(programViewDto.getRegion()).isEqualTo("region");
+                    then(programViewDto.getThemeName()).isEqualTo("theme");
                 }
         );
 
@@ -77,6 +78,7 @@ class ProgramViewServiceImplTest {
                     then(p.getIntroduction()).isEqualTo("introduction");
                     then(p.getIntroductionDetail()).isEqualTo("introductionDetail");
                     then(p.getRegion()).isEqualTo("region");
+                    then(p.getThemeName()).isEqualTo("theme");
                 }
         );
     }
