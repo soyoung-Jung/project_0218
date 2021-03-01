@@ -17,6 +17,7 @@ import static com.github.homework.theme.domain.QTheme.theme;
 
 public class ProgramCustomRepositoryImpl extends QuerydslRepositorySupport implements ProgramCustomRepository {
 
+    //QuerydslRepositorySupport클래스에는 기본 생성자가 없음.
     public ProgramCustomRepositoryImpl() {
         super(Program.class);
     }
