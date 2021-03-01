@@ -61,7 +61,7 @@ class ProgramViewServiceImplTest {
     @DisplayName("프로그램이 여러개 일때")
     void pageByTest() {
         //given
-        ProgramViewDto programViewDto = new ProgramViewDto(1L, "name", "introduction", "introductionDetail", "region");
+        ProgramViewDto programViewDto = new ProgramViewDto(1L, "name", "introduction", "introductionDetail", "region", "theme");
         given(programRepository.findBy(PageRequest.of(0, 100)))
                 .willReturn(
                         new PageImpl<>(List.of(programViewDto, programViewDto))
