@@ -1,6 +1,7 @@
 package com.github.homework.program.service;
 
 import com.github.homework.program.domain.Program;
+import com.github.homework.program.exception.ProgramNotFoundException;
 import com.github.homework.program.model.ProgramViewDto;
 import com.github.homework.program.repository.ProgramRepository;
 import com.github.homework.theme.domain.Theme;
@@ -44,5 +45,20 @@ public class ProgramViewServiceImpl implements ProgramViewService {
     @Override
     public Page<ProgramViewDto> pageBy(Pageable pageable) {
         return programRepository.findBy(pageable);
+    }
+
+    @Override
+    public Optional<ProgramViewDto> findByName(String name) {
+        Optional<Program> byName = programRepository.findByName(name);
+        return byName.map(p ->
+                new ProgramViewDto(
+                        p.getId(),
+                        p.getName(),
+                        p.getIntroduction(),
+                        p.getIntroductionDetail(),
+                        p.getRegion(),
+                        p.getTheme().getName()
+                )
+        );
     }
 }

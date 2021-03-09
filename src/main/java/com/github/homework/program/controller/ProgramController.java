@@ -33,7 +33,7 @@ public class ProgramController {
         return ResponseEntity.ok(this.programViewService.pageBy(pageable));
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("id/{id}")
     public ResponseEntity<ProgramViewDto> getBy(@PathVariable Long id) {
         Optional<ProgramViewDto> programViewDto = this.programViewService.getBy(id);
         return programViewDto.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
@@ -55,5 +55,11 @@ public class ProgramController {
             return ResponseEntity.notFound().build();
         }
         return ResponseEntity.ok(new SimpleResponse(true, "수정 성공"));
+    }
+
+    @GetMapping("/name/{name}")
+    public ResponseEntity<ProgramViewDto> findByName(@PathVariable String name){
+        Optional<ProgramViewDto> programViewDto = this.programViewService.findByName(name);
+        return programViewDto.map(ResponseEntity :: ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 }
