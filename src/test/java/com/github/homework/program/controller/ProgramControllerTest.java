@@ -33,10 +33,10 @@ public class ProgramControllerTest extends BaseControllerTest {
     private ThemeRepository themeRepository;
 
     @Test
-    @DisplayName("프로그램 단건 조회")
-    public void getProgramTest() throws Exception {
+    @DisplayName("프로그램 id로 단건 조회")
+    public void getProgramByIdTest() throws Exception {
         Program program = givenProgram(givenTheme("식도락여행"));
-        this.mockMvc.perform(get("/api/programs/{id}", program.getId()))
+        this.mockMvc.perform(get("/api/programs/id/{id}", program.getId()))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("id").isNumber())
                 .andExpect(jsonPath("name").value("여수 10미 먹거리"))
@@ -52,9 +52,9 @@ public class ProgramControllerTest extends BaseControllerTest {
     }
 
     @Test
-    @DisplayName("프로그램 단건 조회 결과 없음")
-    public void getProgramFailTest() throws Exception {
-        this.mockMvc.perform(get("/api/programs/{id}", 10L))
+    @DisplayName("프로그램 id로 단건 조회 결과 없음")
+    public void getProgramByIdFailTest() throws Exception {
+        this.mockMvc.perform(get("/api/programs/id/{id}", 10L))
                 .andExpect(status().isNotFound());
     }
 
@@ -172,5 +172,32 @@ public class ProgramControllerTest extends BaseControllerTest {
 
     private Theme givenTheme(String name) {
         return this.themeRepository.save(new Theme(name));
+    }
+
+
+    @Test
+    @DisplayName("프로그램 name으로 단건 조회")
+    public void getProgramByNameTest() throws Exception {
+        Program program = givenProgram(givenTheme("식도락여행"));
+        this.mockMvc.perform(get("/api/programs/name/{name}", program.getName()))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("id").isNumber())
+                .andExpect(jsonPath("name").value("여수 10미 먹거리"))
+                .andExpect(jsonPath("introduction").value("여수시 일대 게장백반, 돌산갓김치등"))
+                .andExpect(jsonPath("introductionDetail").value("여행자와 현지인이 꼽은 최고의 먹거리 여행지' 에서 대한민국 229개 지방자치단체 중 여수시가 1위에 선정되어 식도락 여행에 최적화된 프로그램"))
+                .andExpect(jsonPath("region").value("전라남도 여수시"))
+                .andExpect(jsonPath("themeName").value("식도락여행"))
+                .andDo(write.document(
+                        pathParameters(
+                                parameterWithName("name").description("name")
+                        )
+                ));
+    }
+
+    @Test
+    @DisplayName("프로그램 name으로 단건 조회 결과 없음")
+    public void getProgramByNameFailTest() throws Exception {
+        this.mockMvc.perform(get("/api/programs/name/{name}", 10L))
+                .andExpect(status().isNotFound());
     }
 }

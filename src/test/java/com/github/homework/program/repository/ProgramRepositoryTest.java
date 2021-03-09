@@ -7,6 +7,7 @@ import com.github.homework.program.model.ProgramViewDto;
 import com.github.homework.theme.domain.Theme;
 import com.github.homework.theme.repository.ThemeRepository;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.IntStream;
 import org.junit.jupiter.api.DisplayName;
@@ -62,5 +63,26 @@ class ProgramRepositoryTest {
 
                 }
         );
+    }
+
+    @Test
+    @DisplayName("프로그램이 한 건일 때 테스트")
+    public void findByNameTest() {
+        //given
+        Program program = Program.builder()
+                .name("name")
+                .introduction("introduction")
+                .introductionDetail("introductionDetail")
+                .region("region")
+                .theme(new Theme("theme"))
+                .build();
+
+        testEntityManager.persist(program);
+        testEntityManager.flush();
+        testEntityManager.clear();
+
+        //when
+        Optional<Program> programEntity = programRepository.findByName(program.getName());
+
     }
 }
