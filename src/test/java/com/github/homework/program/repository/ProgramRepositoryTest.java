@@ -58,7 +58,9 @@ class ProgramRepositoryTest {
                 then(programViewDto.getIntroduction()).isEqualTo("introduction");
                 then(programViewDto.getIntroductionDetail()).isEqualTo("introductionDetail");
                 then(programViewDto.getRegion()).isEqualTo("region");
-            }
+                then(programViewDto.getThemeName()).contains("theme");
+
+                }
         );
     }
 }

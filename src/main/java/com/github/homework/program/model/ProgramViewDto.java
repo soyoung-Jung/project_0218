@@ -1,10 +1,6 @@
 package com.github.homework.program.model;
 
-import com.github.homework.theme.domain.Theme;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
 
 @Getter
 public class ProgramViewDto {
