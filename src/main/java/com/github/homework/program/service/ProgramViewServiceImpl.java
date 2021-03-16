@@ -30,6 +30,10 @@ public class ProgramViewServiceImpl implements ProgramViewService {
     @Override
     public Optional<ProgramViewDto> getBy(Long id) {
         Optional<Program> byId = programRepository.findById(id);
+        if (byId.isPresent()){
+            Program entity = byId.get();
+            entity.updateCount();
+        }
         return byId.map(p ->
                 new ProgramViewDto(
                         p.getId(),
@@ -37,7 +41,8 @@ public class ProgramViewServiceImpl implements ProgramViewService {
                         p.getIntroduction(),
                         p.getIntroductionDetail(),
                         p.getRegion(),
-                        p.getTheme().getName()
+                        p.getTheme().getName(),
+                        p.getCount()
                 )
         );
     }
@@ -50,6 +55,10 @@ public class ProgramViewServiceImpl implements ProgramViewService {
     @Override
     public Optional<ProgramViewDto> findByName(String name) {
         Optional<Program> byName = programRepository.findByName(name);
+//        if (byName.isPresent()){
+//            Program entity = byName.get();
+//            entity.setCount(entity.getCount() + 1);
+//            programRepository.save(entity);
         return byName.map(p ->
                 new ProgramViewDto(
                         p.getId(),
@@ -57,7 +66,8 @@ public class ProgramViewServiceImpl implements ProgramViewService {
                         p.getIntroduction(),
                         p.getIntroductionDetail(),
                         p.getRegion(),
-                        p.getTheme().getName()
+                        p.getTheme().getName(),
+                        p.getCount()
                 )
         );
     }

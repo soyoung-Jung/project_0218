@@ -33,7 +33,8 @@ public class ProgramCustomRepositoryImpl extends QuerydslRepositorySupport imple
                         program.introduction,
                         program.introductionDetail,
                         program.region,
-                        program.theme.name
+                        program.theme.name,
+                        program.count
                 ));
 
         return PageableExecutionUtils.getPage(query.fetch(), pageable, query::fetchCount);

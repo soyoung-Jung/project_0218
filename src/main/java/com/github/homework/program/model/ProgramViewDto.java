@@ -11,13 +11,15 @@ public class ProgramViewDto {
     private String introductionDetail;
     private String region;
     private String themeName;
+    private Integer count;
 
-    public ProgramViewDto(Long id, String name, String introduction, String introductionDetail, String region, String themeName) {
+    public ProgramViewDto(Long id, String name, String introduction, String introductionDetail, String region, String themeName, Integer count) {
         this.id = id;
         this.name = name;
         this.introduction = introduction;
         this.introductionDetail = introductionDetail;
         this.region = region;
         this.themeName = themeName;
+        this.count = count;
     }
 }
