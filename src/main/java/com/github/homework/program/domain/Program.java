@@ -34,7 +34,7 @@ public class Program {
     @Column(name = "introduction_detail", nullable = false)
     private String introductionDetail;
     @Column(name = "count")
-    @ColumnDefault("200")
+//    @ColumnDefault("0")
     private Integer count;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
