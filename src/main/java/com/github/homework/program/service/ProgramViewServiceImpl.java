@@ -71,4 +71,19 @@ public class ProgramViewServiceImpl implements ProgramViewService {
                 )
         );
     }
+
+    @Override
+    public List<ProgramViewDto> findTop10ByCount() {
+        List<Program> programs = programRepository.findTop10ByOrderByCountDesc();
+        return programs.stream().map(p ->
+                new ProgramViewDto(
+                        p.getId(),
+                        p.getName(),
+                        p.getIntroduction(),
+                        p.getIntroductionDetail(),
+                        p.getRegion(),
+                        p.getTheme().getName(),
+                        p.getCount()
+                )).collect(Collectors.toList());
+    }
 }

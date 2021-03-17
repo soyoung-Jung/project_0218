@@ -21,7 +21,7 @@ public class ProgramSaveDto {
     @NotBlank
     private String region;
     @NotBlank
-    private String themeName;;
+    private String themeName;
 
     @Builder
     public ProgramSaveDto(Long id, String name, String introduction, String introductionDetail, String region,

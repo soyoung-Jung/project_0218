@@ -62,4 +62,11 @@ public class ProgramController {
         Optional<ProgramViewDto> programViewDto = this.programViewService.findByName(name);
         return programViewDto.map(ResponseEntity :: ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
+
+    @GetMapping("/top10")
+    public ResponseEntity<List<ProgramViewDto>> findTop10ByCount() {
+        List<ProgramViewDto> programs = programViewService.findTop10ByCount();
+        Optional<List<ProgramViewDto>> opt = Optional.ofNullable(programs);
+        return opt.map(ResponseEntity :: ok).orElseGet(() -> ResponseEntity.notFound().build());
+    }
 }
